@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createServer, Model } from "miragejs"
 
 export default function () { 
@@ -17,14 +18,24 @@ export default function () {
 
     routes() {
         this.namespace = "api"
+        this.logging = false
 
-        this.get("/vans", (schema) => {
+        this.get("/vans", (schema, request) => {
             return schema.vans.all()
         })
         
         this.get("/vans/:id", (schema, request) => {
             const id = request.params.id
             return schema.vans.find(id)
+        })
+
+        this.get("/host/vans", (schema, request) => {
+            return schema.vans.where({ hostId: "123"})
+        })
+
+        this.get("/host/vans/:id", (schema, request) => {
+            const id = request.params.id
+            return schema.vans.findBy({ id, hostId: "123"})
         })
     }
 })
