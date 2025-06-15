@@ -16,28 +16,28 @@ export default function () {
             server.create("van", { id: "6", name: "Green Wonder", price: 70, description: "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.", imageUrl: "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png", type: "rugged" })
         },
 
-    routes() {
-        this.namespace = "api"
-        this.logging = false
+        routes() {
+            this.namespace = "api"
+            this.logging = false
 
-        this.get("/vans", (schema, request) => {
-            return schema.vans.all()
-        })
-        
-        this.get("/vans/:id", (schema, request) => {
-            const id = request.params.id
-            return schema.vans.find(id)
-        })
+            this.get("/vans", (schema, request) => {
+                return schema.vans.all()
+            })
+            
+            this.get("/vans/:id", (schema, request) => {
+                const id = request.params.id
+                return schema.vans.find(id)
+            })
 
-        this.get("/host/vans", (schema, request) => {
-            return schema.vans.where({ hostId: "123"})
-        })
+            this.get("/host/vans", (schema, request) => {
+                return schema.vans.where({ hostId: "123"})
+            })
 
-        this.get("/host/vans/:id", (schema, request) => {
-            const id = request.params.id
-            return schema.vans.findBy({ id, hostId: "123"})
-        })
-    }
-})
+            this.get("/host/vans/:id", (schema, request) => {
+                const id = request.params.id
+                return schema.vans.findBy({ id, hostId: "123"})
+            })
+        }
+    })
 
 }
