@@ -34,14 +34,16 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route index element={<Home />}/>
     <Route path="about" element={<About />}/>
     <Route path="login" element={<Login />}/>
+    <Route path="vans/:id" element={<VanDetail />}/>
     <Route 
     path="vans" 
     element={<Vans />} 
     errorElement={<Error />} 
     loader={vansLoader} 
     />
-    <Route path="vans/:id" element={<VanDetail />}/>
 
+    <Route element={<AuthRequiried />}>
+  
     <Route path="host" element={<HostLayout />}>
       <Route index element={<Dashboard />}/>
       <Route path="income" element={<Income />}/>            

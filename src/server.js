@@ -38,6 +38,18 @@ export default function () {
                 const id = request.params.id
                 return schema.vans.findBy({ id, hostId: "123"})
             })
+
+            this.post("/login", (schema, request) => {
+                const { email, password } = JSON.parse(request.requestBody)
+                const foundUser = schema.user.findBy({ email, password})
+
+                if (!foundUser) {
+                    return {
+                        user: foundUser,
+                        token: "Enjoy your pizza, here's your token."
+                    }
+                }
+            })
         }
     })
 
