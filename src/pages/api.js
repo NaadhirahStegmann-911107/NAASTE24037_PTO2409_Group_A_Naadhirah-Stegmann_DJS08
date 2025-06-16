@@ -1,9 +1,6 @@
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(() => resolve(), ms))
-}
-
-export async function getVans() {
-    const res = await fetch("/api/vans");
+export async function getVans(id) {
+    const url = id ? `/api/vans/${id}` : "/api/vans"
+    const res = await fetch(url)
     if (!res.ok) {
         throw {
             message: "Failed to fetch vans",
@@ -11,12 +8,12 @@ export async function getVans() {
             status: res.status
         }
     }
-    const data = await res.json();
+    const data = await res.json()
     return data.vans
 }
 
 export async function getHostVans(id) {
-    const url = id ? `appi/host/van/${id}` : "/api/hosst/vans"
+    const url = id ? `/api/host/vans/${id}` : "/api/host/vans"
     const res = await fetch(url)
     if (!res.ok) {
         throw {
@@ -31,10 +28,10 @@ export async function getHostVans(id) {
 
 export async function loginUser(creds) {
     const res = await fetch("/api/login",
-        { method:"post", bosy: json.stringify(creds) }
+        { method: "post", body: JSON.stringify(creds) }
     )
     const data = await res.json()
-    
+
     if (!res.ok) {
         throw {
             message: data.message,
@@ -42,5 +39,6 @@ export async function loginUser(creds) {
             status: res.status
         }
     }
+
     return data
 }
