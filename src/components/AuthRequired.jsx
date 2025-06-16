@@ -8,6 +8,7 @@ export default function AuthRequired() {
             <Navigate 
                 to="/Login" 
                 state={{message: "You must log in first"}}
+                replace
             />)
     }
     return <Outlet />
