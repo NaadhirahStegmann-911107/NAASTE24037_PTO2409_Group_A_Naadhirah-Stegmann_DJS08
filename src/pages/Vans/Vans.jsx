@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
