@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
@@ -11,12 +12,21 @@ export default function Vans() {
 
     React.useEffect(() => {
         async function loadVans() {
-            const data = await getVans()
-            setVans(data);
-            setLoading(false);
-        }
+            setLoading(true)
+            try {
+                const data = await getVans()
+                setVans(data);
+            
+                } catch (err) {
+                    console.log(err);
+                } finally {  
+                    setLoading(false)
+                }
+            }       
+
             loadVans();
-    }, [])
+    }, []);
+        
 
     const displayedVans = typeFilter
         ? vans.filter(van => van.type === typeFilter)
@@ -47,8 +57,11 @@ export default function Vans() {
     }
 
     if(loading) {
-        return <h1>Loading...</h1>
+        return <h1 aria-live="polite">Loading...</h1>
+    }
 
+    if (error) {
+        return <h1 aria-live="assertive">There was an error: {error.buttons}</h1>
     }
 
     return (
